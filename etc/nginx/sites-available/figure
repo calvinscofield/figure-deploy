@@ -1,0 +1,49 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/figure;
+
+        index index.html;
+
+        server_name _;
+
+        location / {
+		try_files $uri $uri/ /index.html;
+        }
+
+	location ^~ /api/ {
+                proxy_pass http://localhost:8080/;
+                proxy_read_timeout 1800;
+		proxy_set_header X-Forwarded-For $remote_addr;
+        }
+}
+
+server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+
+        root /var/www/figure;
+
+        index index.html;
+
+        server_name _;
+
+        ssl_certificate 1_www.figure.ltd_bundle.crt;
+        ssl_certificate_key 2_www.figure.ltd.key;
+        ssl_session_timeout 5m;
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+        ssl_prefer_server_ciphers on;
+
+        location / {
+ 		try_files $uri $uri/ /index.html;
+        }
+
+	location ^~ /api/ {
+                proxy_pass http://localhost:8080/;
+                proxy_read_timeout 1800;
+		proxy_set_header X-Forwarded-For $remote_addr;
+
+        }
+}

@@ -28,9 +28,12 @@ add | A)
     chown $name:$group /var/$name/$name-$version.jar
     chmod 500 /var/$name/$name-$version.jar
     chattr +i /var/$name/$name-$version.jar
+    rm /etc/init.d/$name
     ln -s /var/$name/$name-$version.jar /etc/init.d/$name
     update-rc.d $name defaults
     service $name start
+    systemctl daemon-reload
+    service $name restart
     echo "$version 添加成功!"
     ;;
 update | U)

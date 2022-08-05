@@ -52,33 +52,3 @@ update | U)
     exit 0
     ;;
 esac
-
-# mode="add"
-# version="0.0.1"
-# name="figure"
-
-# if [ ${mode} = "add" ]; then
-#     groupadd bootapp
-#     useradd -g bootapp -s /usr/sbin/nologin ${name}
-#     mkdir /var/${name}
-#     chown ${name}:${gname} /var/${name}
-#     cp application-${name}.properties /var/${name}/application.properties
-#     chown ${name}:${gname} /var/${name}/application.properties
-#     chmod 400 /var/${name}/application.properties
-#     cp ${name}-${version}.jar /var/${name}/
-#     chown ${name}:${gname} /var/${name}/${name}-${version}.jar
-#     chmod 500 /var/${name}/${name}-${version}.jar
-#     chattr +i /var/${name}/${name}-${version}.jar
-#     ln -s /var/${name}/${name}-${version}.jar /etc/init.d/${name}
-#     update-rc.d ${name} defaults
-#     service ${name} start
-# else
-#     cp ${name}-${version}.jar /var/${name}/
-#     chown ${name}:${gname} /var/${name}/${name}-${version}.jar
-#     chmod 500 /var/${name}/${name}-${version}.jar
-#     chattr +i /var/${name}/${name}-${version}.jar
-#     rm /etc/init.d/${name}
-#     ln -s /var/${name}/${name}-${version}.jar /etc/init.d/${name}
-#     systemctl daemon-reload
-#     service ${name} restart
-# fi
